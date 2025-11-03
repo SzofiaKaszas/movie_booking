@@ -3,9 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= message %></title>
+  <title></title>
 </head>
 <body>
-  <h1><%= message %></h1>
+  <div class="container">
+  <form method="post" action="/reserv">
+    <h2>Foglalási adatok</h2>
+
+    <label>Név:</label>
+    <input type="text" name="name" required value="<%= values ? values.name : "" %>" ><br/>
+    <label>Email:</label>
+    <input type="email" name="email" required value="<%= values ? values.email : ""%>" ><br/>
+    <label>Időpont:</label>
+    <input type="date" name="date" required value="<%= values ? values.date : ""%>" ><br/>
+    <label>Vendégek:</label>
+    <input type="number" name="customers" required min="1" value="<%= values ? values.customers: "" %>" ><br/>
+
+    <% if(error.length > 0){%>
+      <div class="alert">
+        <p><%=error%></p>
+      </div>
+   <% }
+     %>
+
+    <button class="btn" type="submit">Foglalás</button>
+  </form>
+  </div>
 </body>
 </html>
