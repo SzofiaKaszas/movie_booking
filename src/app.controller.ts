@@ -37,28 +37,19 @@ export class AppController {
       dto.customers.trim() == ''
     ) {
       error = 'Minden mezőt kötelező kitölteni';
-     return res.render('index', {
-        error,
-        values: dto,
-      })
+     return Return();
     }
 
     if (!dto.name.trim().includes(' ')) {
       error = 'Teljes nevet adjon meg';
-      return res.render('index', {
-        error,
-        values: dto,
-      })
+      return Return();
     }
 
     const regexEmail = /^\S+@+\S+$/;
 
     if (!regexEmail.test(dto.email)) {
       error = 'Érvényes email címet adjon meg';
-      return res.render('index', {
-        error,
-        values: dto,
-      })
+      return Return();
     }
 
     const now = new Date();
@@ -66,20 +57,14 @@ export class AppController {
 
     if(now >= i){
       error = "Érvényes dátumot adjon meg!";
-      return res.render('index', {
-        error,
-        values: dto,
-      })
+      return Return();
     }
 
     const customersNum: number = parseInt(dto.customers);
 
     if (customersNum < 0) {
       error = 'Érvényes néző számot adjon meg';
-      return res.render('index', {
-        error,
-        values: dto,
-      })
+      return Return();
     }
 
 
@@ -98,11 +83,15 @@ export class AppController {
 
       res.redirect("/success")
     /*} else {
-      return res.render('index', {
+      return Return();;
+    }*/
+
+      function Return(){
+        return res.render('index', {
         error,
         values: dto,
-      });
-    }*/
+      })
+      }
   }
 
   @Get("/success")
