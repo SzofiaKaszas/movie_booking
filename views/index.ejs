@@ -1,33 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>Foglalási űrlap</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
 </head>
 <body>
   <div class="container">
-  <form method="post" action="/reserv">
-    <h2>Foglalási adatok</h2>
+    <div class="col-md-8 col-lg-5 mx-auto">
+      <div class="card p-4">
+        <h2 class="text-center mb-4">Foglalási adatok</h2>
 
-    <label>Név:</label>
-    <input type="text" name="name" required value="<%= values ? values.name : "" %>" ><br/>
-    <label>Email:</label>
-    <input type="email" name="email" required value="<%= values ? values.email : ""%>" ><br/>
-    <label>Időpont:</label>
-    <input type="date" name="date" required value="<%= values ? values.date : ""%>" ><br/>
-    <label>Vendégek:</label>
-    <input type="number" name="customers" required min="1" value="<%= values ? values.customers: "" %>" ><br/>
+        <form method="post" action="/reserv">
+          <div class="mb-3">
+            <label for="name" class="form-label">Név</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              required
+              value="<%= values ? values.name : '' %>"
+            />
+          </div>
 
-    <% if(error.length > 0){%>
-      <div class="alert">
-        <p><%=error%></p>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+              value="<%= values ? values.email : '' %>"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="date" class="form-label">Időpont</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              class="form-control"
+              required
+              value="<%= values ? values.date : '' %>"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="customers" class="form-label">Vendégek száma</label>
+            <input
+              type="number"
+              id="customers"
+              name="customers"
+              class="form-control"
+              required
+              min="1"
+              value="<%= values ? values.customers : '' %>"
+            />
+          </div>
+
+          <% if (error && error.length > 0) { %>
+            <div class="alert alert-danger text-center">
+              <%= error %>
+            </div>
+          <% } %>
+
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn-modern">Foglalás</button>
+          </div>
+        </form>
       </div>
-   <% }
-     %>
-
-    <button class="btn" type="submit">Foglalás</button>
-  </form>
+    </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="/style.css" />
 </body>
 </html>
